@@ -10,7 +10,7 @@
 typedef struct {
      int ini;
      int fim;
-     int nivel;
+     int n_subs;
 } subVetores;
  int ventorInput[maxEntrada];
  int aux[maxEntrada];
@@ -25,12 +25,12 @@ typedef struct {
  		subVetores *esq = malloc(sizeof (subVetores));
  		esq->ini = margensVetor->ini;
  		esq->fim = media;
- 		esq->nivel = margensVetor->nivel+1;
+ 		esq->n_subs = margensVetor->n_subs+1;
  		subVetores *dir = malloc(sizeof (subVetores));
  		dir->ini = media+1;
  		dir->fim = margensVetor->fim;
- 		dir->nivel = margensVetor->nivel+1;
- 		if(margensVetor->nivel <= maxSubThreads){
+ 		dir->n_subs = margensVetor->n_subs+1;
+ 		if(margensVetor->n_subs <= maxSubThreads){
  			pthread_create(&threadPivo, NULL, mergeSort, esq);
        pthread_join(threadPivo, NULL);
  			pthread_create(&threadFinal, NULL, mergeSort, dir);
@@ -82,7 +82,7 @@ int main() {
 	subVetores *args = malloc(sizeof (subVetores));
 	args->ini = 0;
 	args->fim = size-1;
-	args->nivel = 1;
+	args->n_subs = 1;
 
   	mergeSort(args);
 
