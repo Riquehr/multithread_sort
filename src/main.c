@@ -16,7 +16,9 @@ typedef struct {
  int aux[maxEntrada];
 
 
- void ordenaVetores(int id,int ie,int limEsq,int limDir,int media){
+ void ordenaVetores(int limEsq,int limDir,int media){
+   int id=media+1;
+   int ie=limEsq;
    int i;
    for(i = limEsq ; ie <= media && id <= limDir ; i++){
        if(ventorInput[ie] >= ventorInput[id]){
@@ -94,10 +96,10 @@ typedef struct {
        mergeSort(dir);
      }
 
- 		 
 
 
- 		ordenaVetores(media+1, margensVetor->limEsq,margensVetor->limEsq,margensVetor->limDir, media);
+
+ 		ordenaVetores(margensVetor->limEsq,margensVetor->limDir, media);
  	}
 
  	return NULL;
