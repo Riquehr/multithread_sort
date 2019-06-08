@@ -15,6 +15,59 @@ typedef struct {
  int ventorInput[maxEntrada];
  int aux[maxEntrada];
 
+
+ void ordenaVetores(int id,int ie,int limEsq,int limDir,int media){
+   int i;
+   for(i = limEsq ; ie <= media && id <= limDir ; i++){
+       if(ventorInput[ie] >= ventorInput[id]){
+          aux[i] = ventorInput[id];
+          id++;
+         }
+         else{
+            aux[i] = ventorInput[ie];
+           ie++;
+         }
+     }
+     while(ie <= media){
+         aux[i] = ventorInput[ie];
+         i++;
+         ie++;
+     }
+     while(id <= limDir){
+         aux[i] = ventorInput[id];
+         i++;
+         id++;
+     }
+     for(i = limEsq ; i <= limDir ; i++){
+         ventorInput[i] = aux[i];
+     }
+     for(i = limEsq ; ie <= media && id <= limDir ; i++){
+         if(ventorInput[ie] >= ventorInput[id]){
+            aux[i] = ventorInput[id];
+            id++;
+           }
+           else{
+              aux[i] = ventorInput[ie];
+             ie++;
+           }
+       }
+       while(ie <= media){
+           aux[i] = ventorInput[ie];
+           i++;
+           ie++;
+       }
+       while(id <= limDir){
+           aux[i] = ventorInput[id];
+           i++;
+           id++;
+       }
+       for(i = limEsq ; i <= limDir ; i++){
+           ventorInput[i] = aux[i];
+       }
+       return;
+ }
+
+
  void *mergeSort(void * args){
    subVetores * margensVetor = args;
    pthread_t threadPivo, threadFinal;
@@ -41,37 +94,15 @@ typedef struct {
        mergeSort(dir);
      }
 
-     int   id = media+1 ;
- 		 int ie=margensVetor->limEsq;
+ 		 
 
-      int i;
- 		for(i = margensVetor->limEsq ; ie <= media && id <= margensVetor->limDir ; i++){
- 	    	if(ventorInput[ie] >= ventorInput[id]){
-           aux[i] = ventorInput[id];
-           id++;
- 	      	}
- 	      	else{
-             aux[i] = ventorInput[ie];
- 	        	ie++;
- 	      	}
- 	    }
- 	    while(ie <= media){
- 	      	aux[i] = ventorInput[ie];
- 	      	i++;
- 	      	ie++;
- 	    }
- 	    while(id <= margensVetor->limDir){
- 	      	aux[i] = ventorInput[id];
- 	      	i++;
- 	      	id++;
- 	    }
- 	    for(i = margensVetor->limEsq ; i <= margensVetor->limDir ; i++){
- 	      	ventorInput[i] = aux[i];
- 	    }
+
+ 		ordenaVetores(media+1, margensVetor->limEsq,margensVetor->limEsq,margensVetor->limDir, media);
  	}
 
  	return NULL;
  }
+
 
 int main() {
 	 int size = 0;
