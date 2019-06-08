@@ -19,14 +19,15 @@ typedef struct {
    subVetores * margensVetor = args;
    pthread_t threadPivo, threadFinal;
  	if(margensVetor->limEsq < margensVetor->limDir){
-
+    subVetores *dir = malloc(sizeof (subVetores));
+    subVetores *esq = malloc(sizeof (subVetores));
  		 int media = (margensVetor->limEsq+margensVetor->limDir)/2;
 
- 		subVetores *esq = malloc(sizeof (subVetores));
+
  		esq->limEsq = margensVetor->limEsq;
  		esq->limDir = media;
  		esq->n_subs = margensVetor->n_subs+1;
- 		subVetores *dir = malloc(sizeof (subVetores));
+
  		dir->limEsq = media+1;
  		dir->limDir = margensVetor->limDir;
  		dir->n_subs = margensVetor->n_subs+1;
