@@ -71,7 +71,7 @@ typedef struct {
 
  	return NULL;
  }
- 
+
 int main() {
 	 int size = 0;
    char virgulas;
