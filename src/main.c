@@ -8,8 +8,8 @@
 
 
 typedef struct {
-     int ini;
-     int fim;
+     int limEsq;
+     int limDir;
      int n_subs;
 } subVetores;
  int ventorInput[maxEntrada];
@@ -18,17 +18,17 @@ typedef struct {
  void *mergeSort(void * args){
    subVetores * margensVetor = args;
    pthread_t threadPivo, threadFinal;
- 	if(margensVetor->ini < margensVetor->fim){
+ 	if(margensVetor->limEsq < margensVetor->limDir){
 
- 		 int media = (margensVetor->ini+margensVetor->fim)/2;
+ 		 int media = (margensVetor->limEsq+margensVetor->limDir)/2;
 
  		subVetores *esq = malloc(sizeof (subVetores));
- 		esq->ini = margensVetor->ini;
- 		esq->fim = media;
+ 		esq->limEsq = margensVetor->limEsq;
+ 		esq->limDir = media;
  		esq->n_subs = margensVetor->n_subs+1;
  		subVetores *dir = malloc(sizeof (subVetores));
- 		dir->ini = media+1;
- 		dir->fim = margensVetor->fim;
+ 		dir->limEsq = media+1;
+ 		dir->limDir = margensVetor->limDir;
  		dir->n_subs = margensVetor->n_subs+1;
  		if(margensVetor->n_subs <= maxSubThreads){
  			pthread_create(&threadPivo, NULL, mergeSort, esq);
@@ -41,10 +41,10 @@ typedef struct {
      }
 
      int   id = media+1 ;
- 		 int ie=margensVetor->ini;
+ 		 int ie=margensVetor->limEsq;
 
       int i;
- 		for(i = margensVetor->ini ; ie <= media && id <= margensVetor->fim ; i++){
+ 		for(i = margensVetor->limEsq ; ie <= media && id <= margensVetor->limDir ; i++){
  	    	if(ventorInput[ie] >= ventorInput[id]){
            aux[i] = ventorInput[id];
            id++;
@@ -59,12 +59,12 @@ typedef struct {
  	      	i++;
  	      	ie++;
  	    }
- 	    while(id <= margensVetor->fim){
+ 	    while(id <= margensVetor->limDir){
  	      	aux[i] = ventorInput[id];
  	      	i++;
  	      	id++;
  	    }
- 	    for(i = margensVetor->ini ; i <= margensVetor->fim ; i++){
+ 	    for(i = margensVetor->limEsq ; i <= margensVetor->limDir ; i++){
  	      	ventorInput[i] = aux[i];
  	    }
  	}
@@ -80,8 +80,8 @@ int main() {
     }
 
 	subVetores *args = malloc(sizeof (subVetores));
-	args->ini = 0;
-	args->fim = size-1;
+	args->limEsq = 0;
+	args->limDir = size-1;
 	args->n_subs = 1;
 
   	mergeSort(args);
