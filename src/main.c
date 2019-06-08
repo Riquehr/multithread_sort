@@ -18,22 +18,22 @@ typedef struct {
 
  void ordenaVetores(int limEsq,int limDir,int media){
    int id=media+1;
-   int ie=limEsq;
+   int countEsq=limEsq;
    int i;
-   for(i = limEsq ; ie <= media && id <= limDir ; i++){
-       if(ventorInput[ie] >= ventorInput[id]){
+   for(i = limEsq ; countEsq <= media && id <= limDir ; i++){
+       if(ventorInput[countEsq] >= ventorInput[id]){
           aux[i] = ventorInput[id];
           id++;
          }
          else{
-            aux[i] = ventorInput[ie];
-           ie++;
+            aux[i] = ventorInput[countEsq];
+           countEsq++;
          }
      }
-     while(ie <= media){
-         aux[i] = ventorInput[ie];
+     while(countEsq <= media){
+         aux[i] = ventorInput[countEsq];
          i++;
-         ie++;
+         countEsq++;
      }
      while(id <= limDir){
          aux[i] = ventorInput[id];
@@ -43,20 +43,20 @@ typedef struct {
      for(i = limEsq ; i <= limDir ; i++){
          ventorInput[i] = aux[i];
      }
-     for(i = limEsq ; ie <= media && id <= limDir ; i++){
-         if(ventorInput[ie] >= ventorInput[id]){
+     for(i = limEsq ; countEsq <= media && id <= limDir ; i++){
+         if(ventorInput[countEsq] >= ventorInput[id]){
             aux[i] = ventorInput[id];
             id++;
            }
            else{
-              aux[i] = ventorInput[ie];
-             ie++;
+              aux[i] = ventorInput[countEsq];
+             countEsq++;
            }
        }
-       while(ie <= media){
-           aux[i] = ventorInput[ie];
+       while(countEsq <= media){
+           aux[i] = ventorInput[countEsq];
            i++;
-           ie++;
+           countEsq++;
        }
        while(id <= limDir){
            aux[i] = ventorInput[id];
